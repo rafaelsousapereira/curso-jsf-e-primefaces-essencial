@@ -5,19 +5,14 @@
 	version="3.1">
 	<display-name>curso-jsf-e-primefaces-essencial</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>GestaoEmpresas.xhtml</welcome-file>
 	</welcome-file-list>
-	
+
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-	
+
 	<context-param>
 		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
 		<param-value>0</param-value>
@@ -31,15 +26,15 @@
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
-	
-	 <servlet>
-	 	<servlet-name>Faces Servlet</servlet-name>
-	 	<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-	 	<load-on-startup>1</load-on-startup>
-	 </servlet>
-	 
-	 <servlet-mapping>
-	 	<servlet-name>Faces Servlet</servlet-name>
-	 	<url-pattern>*.xhtml</url-pattern>
-	 </servlet-mapping>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
 </web-app>
