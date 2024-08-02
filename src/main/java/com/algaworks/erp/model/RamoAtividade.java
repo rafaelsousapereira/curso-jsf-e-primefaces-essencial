@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "ramo_atividade")
 public class RamoAtividade implements Serializable {
@@ -20,6 +22,7 @@ public class RamoAtividade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	@Column(nullable = false, length = 80)
 	private String descricao;
 
