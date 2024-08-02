@@ -18,7 +18,7 @@
 		<h:form id="form">
 			<p:messages id="messages" />
 
-			<p:toolbar>
+			<p:toolbar id="toolbar">
 				<f:facet name="left">
 					<p:inputText id="termoPesquisa"
 						placeholder="Digite aqui um termo para pesquisa..." size="35"
@@ -43,8 +43,11 @@
 						class="ui-icon ui-icon-grip-dotted-vertical" />
 					</span>
 
-					<p:commandButton title="Editar" icon="fa fa-edit" />
-					<p:commandButton title="Excluir" icon="fa fa-trash" />
+					<p:commandButton title="Editar" icon="fa fa-edit"
+						disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
+						
+					<p:commandButton title="Excluir" icon="fa fa-trash"
+						disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 
 					<span class="ui-separator"> <span
 						class="ui-icon ui-icon-grip-dotted-vertical" />
@@ -60,7 +63,13 @@
 			<p:dataTable id="empresasDataTable"
 				value="#{gestaoEmpresasBean.listaEmpresas}" var="empresa"
 				emptyMessage="Nenhuma informação a exibir" paginator="true"
-				paginatorPosition="bottom" rows="10">
+				paginatorPosition="bottom" rows="10" selectionMode="single"
+				selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
+				
+				<p:ajax event="rowSelect" update="form:toolbar" />
+				
+				<p:ajax event="rowUnselect" update="form:toolbar" />
+				
 				<p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
 				</p:column>
