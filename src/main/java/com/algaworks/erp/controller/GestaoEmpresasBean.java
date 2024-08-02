@@ -45,14 +45,6 @@ public class GestaoEmpresasBean implements Serializable {
 
 	private Empresa empresa;
 
-	public void pesquisar() {
-		listaEmpresas = empresas.pesquisar(termoPesquisa);
-
-		if (listaEmpresas.isEmpty()) {
-			messages.info("Sua mensagem não retornou registros.");
-		}
-	}
-
 	public void todasEmpresas() {
 		listaEmpresas = empresas.todas();
 	}
@@ -68,7 +60,7 @@ public class GestaoEmpresasBean implements Serializable {
 	private boolean jaHouvePesquisa() {
 		return termoPesquisa != null && !"".equals(termoPesquisa);
 	}
-	
+
 	public void prepararEdicaoEmpresa() {
 		ramoAtividadeConverter = new RamoAtividadeConverter(Arrays.asList(empresa.getRamoAtividade()));
 	}
@@ -80,15 +72,37 @@ public class GestaoEmpresasBean implements Serializable {
 	public void salvar() {
 		cadastroEmpresaService.salvar(empresa);
 
+		atualizarRegistros();
+
+		messages.info("Empresa salva com sucesso!");
+
+		RequestContext.getCurrentInstance().update(Arrays.asList("form:empresasDataTable", "form:messages"));
+	}
+
+	public void excluir() {
+		cadastroEmpresaService.excluir(empresa);
+
+		empresa = null;
+		
+		atualizarRegistros();
+		
+		messages.info("Empresa excluída com sucesso!");
+	}
+
+	public void pesquisar() {
+		listaEmpresas = empresas.pesquisar(termoPesquisa);
+
+		if (listaEmpresas.isEmpty()) {
+			messages.info("Sua consulta não retornou registros.");
+		}
+	}
+
+	private void atualizarRegistros() {
 		if (jaHouvePesquisa()) {
 			pesquisar();
 		} else {
 			todasEmpresas();
 		}
-
-		messages.info("Empresa salva com sucesso!");
-
-		RequestContext.getCurrentInstance().update(Arrays.asList("form:empresasDataTable", "form:messages"));
 	}
 
 	public List<Empresa> getListaEmpresas() {
@@ -114,11 +128,11 @@ public class GestaoEmpresasBean implements Serializable {
 	public Empresa getEmpresa() {
 		return empresa;
 	}
-	
+
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
+
 	public boolean isEmpresaSelecionada() {
 		return empresa != null && empresa.getId() != null;
 	}
