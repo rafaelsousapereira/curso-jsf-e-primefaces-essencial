@@ -22,6 +22,11 @@
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
+	
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
 
 	<resource-env-ref>
 		<resource-env-ref-name>BeanManager</resource-env-ref-name>
