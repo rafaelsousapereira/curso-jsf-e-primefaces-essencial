@@ -68,6 +68,10 @@ public class GestaoEmpresasBean implements Serializable {
 	private boolean jaHouvePesquisa() {
 		return termoPesquisa != null && !"".equals(termoPesquisa);
 	}
+	
+	public void prepararEdicaoEmpresa() {
+		ramoAtividadeConverter = new RamoAtividadeConverter(Arrays.asList(empresa.getRamoAtividade()));
+	}
 
 	public void prepararNovaEmpresa() {
 		empresa = new Empresa();

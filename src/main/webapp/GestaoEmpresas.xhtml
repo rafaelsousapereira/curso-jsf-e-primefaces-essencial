@@ -44,8 +44,14 @@
 					</span>
 
 					<p:commandButton title="Editar" icon="fa fa-edit"
-						disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
-						
+						disabled="#{not gestaoEmpresasBean.empresaSelecionada}"
+						actionListener="#{gestaoEmpresasBean.prepararEdicaoEmpresa}"
+						oncomplete="PF('empresaDialogWidgetVar').show()"
+						update="empresasDialog" process="@this">
+
+						<p:resetInput target="empresasDialog" />
+					</p:commandButton>
+
 					<p:commandButton title="Excluir" icon="fa fa-trash"
 						disabled="#{not gestaoEmpresasBean.empresaSelecionada}" />
 
@@ -65,11 +71,11 @@
 				emptyMessage="Nenhuma informação a exibir" paginator="true"
 				paginatorPosition="bottom" rows="10" selectionMode="single"
 				selection="#{gestaoEmpresasBean.empresa}" rowKey="#{empresa.id}">
-				
+
 				<p:ajax event="rowSelect" update="form:toolbar" />
-				
+
 				<p:ajax event="rowUnselect" update="form:toolbar" />
-				
+
 				<p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
 				</p:column>
