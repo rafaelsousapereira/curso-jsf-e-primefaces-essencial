@@ -24,7 +24,7 @@ public class EntityManagerProducer implements Serializable {
 	@Produces
 	@RequestScoped
 	public EntityManager createEntityManager() {
-		return this.createEntityManager();
+		return this.factory.createEntityManager();
 	}
 	
 	public void closeEntityManager(@Disposes EntityManager manager) {
