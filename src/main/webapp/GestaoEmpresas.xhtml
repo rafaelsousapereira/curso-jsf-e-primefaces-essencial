@@ -89,16 +89,21 @@
 							var="tipoEmpresa" itemLabel="#{tipoEmpresa.descricao}"
 							itemValue="#{tipoEmpresa}" />
 					</p:selectOneMenu>
-					
+
 					<p:outputLabel value="CNPJ: " for="cnpj" />
-					<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18" maxlength="18"  />
-					
+					<p:inputMask id="cnpj" mask="99.999.999/9999-99" size="18"
+						maxlength="18" />
+
 					<p:outputLabel value="Data fundação: " for="dataFundacao" />
 					<p:calendar id="dataFundacao" pattern="dd/MM/yyyy" size="30" />
-					
+
 					<p:outputLabel value="Ramo atividade: " for="ramoAtividade" />
-					<p:autoComplete id="ramoAtividade" size="80" />
-					
+					<p:autoComplete id="ramoAtividade" size="80"
+						completeMethod="#{gestaoEmpresasBean.completarRamoAtividade}"
+						converter="#{gestaoEmpresasBean.ramoAtividadeConverter}"
+						var="ramoAtividade" itemLabel="#{ramoAtividade.descricao}"
+						itemValue="#{ramoAtividade}" />
+
 					<p:outputLabel />
 					<p:commandButton value="Salvar" />
 				</h:panelGrid>
