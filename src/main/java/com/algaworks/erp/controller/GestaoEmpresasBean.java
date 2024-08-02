@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import com.algaworks.erp.model.Empresa;
 import com.algaworks.erp.repository.Empresas;
+import com.algaworks.erp.util.FacesMessages;
 
 @Named
 @ViewScoped
@@ -18,14 +19,35 @@ public class GestaoEmpresasBean implements Serializable {
 
 	@Inject
 	private Empresas empresas;
+	
+	@Inject
+	private FacesMessages messages;
 
 	private List<Empresa> listaEmpresas;
 
+	private String termoPesquisa;
+	
+	public void pesquisar() {
+		listaEmpresas = empresas.pesquisar(termoPesquisa);
+		
+		if (listaEmpresas.isEmpty()) {
+			messages.info("Sua mensagem não retornou registros.");
+		}
+	}
+	
 	public void todasEmpresas() {
 		listaEmpresas = empresas.todas();
 	}
 
 	public List<Empresa> getListaEmpresas() {
 		return listaEmpresas;
+	}
+	
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+	
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
 	}
 }
